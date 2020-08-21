@@ -1,1 +1,35 @@
-<a href="/">Home</a>
+
+<h1>Ghost Post</h1>
+
+<a href="/addpost/">Add Roast or Boast</a>
+<a href="/boasts/">Boasts</a>
+<a href="/roasts/">Roasts</a>
+<a href="/topvotes/">Top Posts</a>
+<ul class="post_list">
+{% for post in posts %}
+
+       <div>
+        {% if post.is_boast == True %}
+            <h3>Boast</h3>
+        {% elif post.is_boast == False %}
+            <h3>Roast</h3>
+        {% endif %}
+            <div>
+                <a href="/upvote/{{ post.id }}">⬆</a>
+                <a href="/downvote/{{ post.id }}">⬇</a>
+            </div>
+            <div>
+                <ul>
+                    <li>{{ post.content }}
+                        <ul>
+                          <li>Points: {{ post.upvote|add:post.downvote }}</li>
+                            <li>Posted: {{ post.post_date }}</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+{% endfor %}
+</ul>
+</body>
+</html>
